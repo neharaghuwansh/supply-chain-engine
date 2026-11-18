@@ -1,0 +1,24 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Java / Maven
+**/target/
+
+# React / Node
+**/node_modules/
+**/dist/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+/supply-chain-engine/src/main/resources/application.properties
+/supply-chain-engine/test-invoice.pdf

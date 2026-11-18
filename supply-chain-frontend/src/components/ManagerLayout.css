@@ -1,0 +1,25 @@
+.manager-layout {
+    min-height: 100vh;
+    background: #f7f8fc;
+}
+
+.main-content {
+    min-height: 100vh;
+    margin-left: 250px;
+    padding: 34px;
+    overflow-x: hidden;
+}
+
+@media (max-width: 800px) {
+    .main-content {
+        margin-left: 205px;
+        padding: 24px 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        margin-left: 65px;
+        padding: 20px 12px;
+    }
+}

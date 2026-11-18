@@ -1,0 +1,605 @@
+.analytics-page {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    color: #172033;
+}
+
+.analytics-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.analytics-eyebrow {
+    color: #6259d9;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: 1.5px;
+}
+
+.analytics-header h1 {
+    margin: 8px 0;
+    font-size: 30px;
+    font-weight: 850;
+    letter-spacing: -0.8px;
+}
+
+.analytics-header p {
+    max-width: 650px;
+    margin: 0;
+    color: #7b879b;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.analytics-refresh-button {
+    min-height: 41px;
+    padding: 0 14px;
+    border: 1px solid #dedaff;
+    border-radius: 9px;
+    background: #fff;
+    color: #5d55d5;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.analytics-refresh-button:hover {
+    background: #f4f3ff;
+}
+
+.analytics-refresh-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.analytics-section {
+    margin-bottom: 30px;
+}
+
+.analytics-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.analytics-section-heading h2 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 850;
+}
+
+.analytics-section-heading p {
+    margin: 0;
+    color: #8791a5;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.analytics-section-heading > span {
+    padding: 7px 10px;
+    border-radius: 7px;
+    background: #eafaf1;
+    color: #168354;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 0.8px;
+}
+
+.analytics-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.analytics-metric-card {
+    min-width: 0;
+    padding: 21px;
+    border: 1px solid #e8ecf3;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(23, 32, 51, 0.025);
+}
+
+.analytics-metric-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.analytics-metric-top > span {
+    color: #748096;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.analytics-metric-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 850;
+}
+
+.analytics-metric-icon.purple {
+    background: #efedff;
+    color: #655bdc;
+}
+
+.analytics-metric-icon.blue {
+    background: #eaf3ff;
+    color: #3478ce;
+}
+
+.analytics-metric-icon.green {
+    background: #e7f9ef;
+    color: #16935b;
+}
+
+.analytics-metric-icon.red {
+    background: #fff0f0;
+    color: #d14343;
+}
+
+.analytics-metric-icon.orange {
+    background: #fff4e8;
+    color: #d97724;
+}
+
+.analytics-metric-icon.yellow {
+    background: #fff8dc;
+    color: #a17b12;
+}
+
+.analytics-metric-value {
+    display: block;
+    margin: 19px 0 8px;
+    color: #1b2639;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: -0.8px;
+    overflow-wrap: anywhere;
+}
+
+.analytics-metric-description {
+    color: #929caf;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.analytics-financial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.analytics-financial-card {
+    display: flex;
+    min-width: 0;
+    min-height: 155px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 13px;
+    padding: 22px;
+    border: 1px solid #e8ecf3;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.analytics-financial-card > span {
+    color: #748096;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.analytics-financial-card > strong {
+    color: #5d55d5;
+    font-size: clamp(19px, 2vw, 27px);
+    font-weight: 900;
+    letter-spacing: -0.6px;
+    overflow-wrap: anywhere;
+}
+
+.analytics-financial-card > small {
+    color: #929caf;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.analytics-insight-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+    padding: 24px;
+    border: 1px solid #e1dfff;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #f6f5ff, #fff);
+}
+
+.analytics-insight-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 12px;
+    background: #e7e4ff;
+    color: #5d55d5;
+    font-size: 22px;
+}
+
+.analytics-insight-card h2 {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 850;
+}
+
+.analytics-insight-card p {
+    margin: 8px 0 0;
+    color: #737f94;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.analytics-error {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border: 1px solid #fecaca;
+    border-radius: 9px;
+    background: #fff1f2;
+    color: #b42332;
+    font-size: 12px;
+}
+
+.analytics-loading {
+    display: grid;
+    min-height: 220px;
+    place-items: center;
+    border: 1px solid #e8ecf3;
+    border-radius: 14px;
+    background: #fff;
+    color: #7b879b;
+    font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+    .analytics-metric-grid,
+    .analytics-financial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .analytics-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .analytics-metric-grid,
+    .analytics-financial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-metric-card {
+        padding: 18px;
+    }
+
+    .analytics-metric-value {
+        font-size: 25px;
+    }
+}
+    /* ===== Analytics Report Filters ===== */
+
+    .analytics-filter-panel {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #e8ecf3;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 5px 20px rgba(23, 32, 51, 0.025);
+    }
+
+    .analytics-filter-field {
+        display: flex;
+        min-width: 180px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .analytics-filter-field label {
+        color: #748096;
+        font-size: 11px;
+        font-weight: 800;
+    }
+
+    .analytics-filter-field input {
+        min-height: 42px;
+        padding: 0 12px;
+        border: 1px solid #dfe4ee;
+        border-radius: 8px;
+        outline: none;
+        background: #fbfcff;
+        color: #172033;
+        font-family: inherit;
+        font-size: 12px;
+    }
+
+    .analytics-filter-field input:focus {
+        border-color: #7569ed;
+        box-shadow: 0 0 0 3px rgba(98, 89, 217, 0.1);
+    }
+
+    .analytics-apply-button {
+        min-height: 42px;
+        padding: 0 20px;
+        border: none;
+        border-radius: 8px;
+        background: #6259d9;
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .analytics-apply-button:hover {
+        background: #5047c4;
+    }
+
+    .analytics-apply-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    /* ===== Report Summary Cards ===== */
+
+    .analytics-report-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 18px;
+    }
+
+    .analytics-report-summary-card {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 12px;
+        padding: 22px;
+        border: 1px solid #e8ecf3;
+        border-radius: 14px;
+        background: #ffffff;
+    }
+
+    .analytics-report-summary-card > span {
+        color: #748096;
+        font-size: 11px;
+        font-weight: 750;
+    }
+
+    .analytics-report-summary-card > strong {
+        color: #5d55d5;
+        font-size: clamp(21px, 2.2vw, 29px);
+        font-weight: 900;
+        letter-spacing: -0.7px;
+        overflow-wrap: anywhere;
+    }
+
+    .analytics-report-summary-card > small {
+        color: #929caf;
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    /* ===== Report Panels ===== */
+
+    .analytics-report-panel {
+        min-width: 0;
+        padding: 22px;
+        overflow: hidden;
+        border: 1px solid #e8ecf3;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 5px 20px rgba(23, 32, 51, 0.025);
+    }
+
+    .analytics-report-panel h3 {
+        margin: 0 0 22px;
+        color: #172033;
+        font-size: 14px;
+        font-weight: 850;
+    }
+
+    .analytics-empty-state {
+        padding: 24px 12px;
+        color: #8791a5;
+        font-size: 12px;
+        line-height: 1.7;
+        text-align: center;
+    }
+
+    /* ===== Daily Revenue Trend ===== */
+
+    .analytics-trend-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .analytics-trend-row {
+        display: grid;
+        grid-template-columns: 100px minmax(60px, 1fr) minmax(95px, auto) 70px;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .analytics-trend-date {
+        color: #748096;
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .analytics-trend-track {
+        height: 11px;
+        overflow: hidden;
+        border-radius: 20px;
+        background: #f0efff;
+    }
+
+    .analytics-trend-bar {
+        height: 100%;
+        min-width: 3px;
+        border-radius: 20px;
+        background: linear-gradient(90deg, #8176f3, #5d55d5);
+        transition: width 0.3s ease;
+    }
+
+    .analytics-trend-row > strong {
+        color: #263148;
+        font-size: 11px;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .analytics-trend-row > small {
+        color: #929caf;
+        font-size: 10px;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    /* ===== Top-Selling Products Table ===== */
+
+    .analytics-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .analytics-report-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    .analytics-report-table th {
+        padding: 13px 14px;
+        border-bottom: 1px solid #e8ecf3;
+        background: #f8f9fd;
+        color: #748096;
+        font-size: 10px;
+        font-weight: 850;
+        white-space: nowrap;
+    }
+
+    .analytics-report-table td {
+        padding: 16px 14px;
+        border-bottom: 1px solid #f0f2f7;
+        color: #526078;
+        font-size: 11px;
+    }
+
+    .analytics-report-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .analytics-report-table tbody tr:hover {
+        background: #fafaff;
+    }
+
+    .analytics-report-table td strong {
+        color: #263148;
+        font-weight: 800;
+    }
+
+    .analytics-rank {
+        display: inline-grid;
+        width: 29px;
+        height: 29px;
+        place-items: center;
+        border-radius: 9px;
+        background: #efedff;
+        color: #6259d9;
+        font-size: 11px;
+        font-weight: 850;
+    }
+
+    /* ===== Inventory Movement Note ===== */
+
+    .analytics-report-note {
+        margin-top: 15px;
+        padding: 14px 16px;
+        border: 1px solid #e4e8f1;
+        border-radius: 9px;
+        background: #f8f9fd;
+        color: #748096;
+        font-size: 11px;
+        line-height: 1.8;
+    }
+
+    /* ===== Responsive Reports Layout ===== */
+
+    @media (max-width: 900px) {
+        .analytics-trend-row {
+            grid-template-columns: 85px minmax(50px, 1fr) minmax(90px, auto);
+            gap: 10px;
+        }
+
+        .analytics-trend-row > small {
+            display: none;
+        }
+
+        .analytics-report-summary {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 650px) {
+        .analytics-filter-panel {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .analytics-filter-field {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .analytics-report-summary {
+            grid-template-columns: 1fr;
+        }
+
+        .analytics-report-panel {
+            padding: 16px;
+        }
+
+        .analytics-trend-row {
+            grid-template-columns: 75px minmax(40px, 1fr) auto;
+            gap: 8px;
+        }
+
+        .analytics-trend-date {
+            font-size: 9px;
+        }
+
+        .analytics-trend-row > strong {
+            font-size: 10px;
+        }
+
+        .analytics-report-table th,
+        .analytics-report-table td {
+            padding: 12px 10px;
+        }
+    }
