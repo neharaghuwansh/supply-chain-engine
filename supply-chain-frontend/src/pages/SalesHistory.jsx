@@ -367,19 +367,6 @@ function SalesHistory() {
                         </strong>
                     </div>
                 </article>
-
-                <article className="sales-summary-card">
-                    <div className="sales-summary-icon">⌕</div>
-
-                    <div>
-                        <span>Current Page</span>
-
-                        <strong>
-                            {totalPages === 0 ? 0 : page + 1}
-                            <small> / {totalPages}</small>
-                        </strong>
-                    </div>
-                </article>
             </section>
 
             <section className="sales-filter-card">

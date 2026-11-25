@@ -211,7 +211,13 @@ function Dashboard() {
             </section>
 
             <section className="dashboard-bottom">
-                <div className="inventory-value-card">
+                <div
+                    className="inventory-value-card"
+                    style={{
+                        gridColumn: "1 / -1",
+                        width: "100%",
+                    }}
+                >
                     <div className="inventory-value-icon">₹</div>
 
                     <div className="inventory-value-content">
@@ -237,25 +243,6 @@ function Dashboard() {
                     >
                         View Batches <span>→</span>
                     </button>
-                </div>
-
-                <div className="dashboard-tip-card">
-                    <span className="dashboard-tip-icon">✓</span>
-
-                    <div>
-                        <h3>Inventory at a glance</h3>
-                        <p>
-                            Review expiry risks and stock availability
-                            regularly to help prevent avoidable losses.
-                        </p>
-
-                        <button
-                            type="button"
-                            onClick={() => navigate("/low-stock")}
-                        >
-                            Review Low Stock <span>→</span>
-                        </button>
-                    </div>
                 </div>
             </section>
         </div>

@@ -92,7 +92,12 @@ function Invoices() {
 
             const response = await api.post(
                 "/invoices/scan",
-                formData
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
             );
 
             const result = response.data;
@@ -310,7 +315,10 @@ function Invoices() {
                 <div className="invoice-section-heading">
                     <div>
                         <h2>Upload supplier invoice</h2>
-                        <p>Supported formats: PDF, JPG, PNG and WEBP. Maximum 10 MB.</p>
+                        <p>
+                            Supported formats: PDF, JPG, PNG and WEBP.
+                            Maximum 10 MB.
+                        </p>
                     </div>
 
                     <span className="invoice-step-label">STEP 01</span>

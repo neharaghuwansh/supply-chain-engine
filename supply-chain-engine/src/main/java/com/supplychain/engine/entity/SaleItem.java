@@ -1,4 +1,5 @@
 package com.supplychain.engine.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 

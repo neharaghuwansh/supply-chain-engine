@@ -22,6 +22,12 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 
     @EntityGraph(attributePaths = {"items", "items.product", "items.batch"})
     Optional<Sale> findByIdempotencyKey(String idempotencyKey);
+    @EntityGraph(attributePaths = {
+            "items",
+            "items.product",
+            "items.batch"
+    })
+    Optional<Sale> findWithItemsById(Long id);
 
     List<Sale> findBySaleDateBetween(
             LocalDateTime startDate,

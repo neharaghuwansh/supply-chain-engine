@@ -111,6 +111,15 @@ function Batches() {
         return batch.archived === true;
     }
 
+    function isExpired(batch) {
+        if (!batch.expiryDate) return false;
+
+        const now = new Date();
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+        return String(batch.expiryDate).slice(0, 10) < today;
+    }
+
     function getBatchDate(value) {
         if (!value) return "";
 
@@ -259,6 +268,13 @@ function Batches() {
             return;
         }
 
+        if (isExpired(batch)) {
+            setError(
+                "Expired batches cannot be edited through ordinary batch editing."
+            );
+            return;
+        }
+
         setError("");
         setSuccess("");
         setEditingBatchId(batch.id);
@@ -326,7 +342,6 @@ function Batches() {
             setArchivingBatchId(null);
         }
     }
-
     async function handleRestore(batch) {
         if (
             saving ||
@@ -442,18 +457,20 @@ function Batches() {
 
         return (
             <div className="batch-form-actions">
-                <button
-                    type="button"
-                    className="batch-secondary-button"
-                    onClick={() => startEditing(batch)}
-                    disabled={
-                        saving ||
-                        archivingBatchId !== null ||
-                        restoringBatchId !== null
-                    }
-                >
-                    Edit
-                </button>
+                {!isExpired(batch) && (
+                    <button
+                        type="button"
+                        className="batch-secondary-button"
+                        onClick={() => startEditing(batch)}
+                        disabled={
+                            saving ||
+                            archivingBatchId !== null ||
+                            restoringBatchId !== null
+                        }
+                    >
+                        Edit
+                    </button>
+                )}
 
                 <button
                     type="button"
@@ -541,27 +558,32 @@ function Batches() {
                         return (
                             <tr key={batch.id}>
                                 <td>{batch.batchNumber}</td>
-                                <td>{getBatchProductName(batch)}</td>
+                                <td>
+                                    <div className="batch-product-cell">
+                                        <span>{getBatchProductName(batch)}</span>
+                                        <small>SKU: {batch.product?.sku ?? "—"}</small>
+                                    </div>
+                                </td>
                                 <td>{batch.quantity}</td>
                                 <td>{batch.expiryDate || "—"}</td>
 
                                 {archived ? (
                                     <td>
-                                            <span className="risk-badge risk-unknown">
-                                                ARCHIVED
-                                            </span>
+                                        <span className="risk-badge risk-unknown">
+                                            ARCHIVED
+                                        </span>
                                     </td>
                                 ) : expired ? (
                                     <>
                                         <td>
-                                                <span className="days-overdue">
-                                                    {daysOverdue}
-                                                </span>
+                                            <span className="days-overdue">
+                                                {daysOverdue}
+                                            </span>
                                         </td>
                                         <td>
-                                                <span className="risk-badge risk-expired">
-                                                    EXPIRED
-                                                </span>
+                                            <span className="risk-badge risk-expired">
+                                                EXPIRED
+                                            </span>
                                         </td>
                                     </>
                                 ) : (
@@ -570,13 +592,13 @@ function Batches() {
                                             {risk?.daysUntilExpiry ?? "—"}
                                         </td>
                                         <td>
-                                                <span
-                                                    className={getRiskClass(
-                                                        risk?.riskLevel
-                                                    )}
-                                                >
-                                                    {risk?.riskLevel || "Unknown"}
-                                                </span>
+                                            <span
+                                                className={getRiskClass(
+                                                    risk?.riskLevel
+                                                )}
+                                            >
+                                                {risk?.riskLevel || "Unknown"}
+                                            </span>
                                         </td>
                                     </>
                                 )}
@@ -648,188 +670,203 @@ function Batches() {
                     {error}
                 </div>
             )}
-
             <section className="batch-summary">
+
                 <div className="batch-summary-card">
-                    <span>Total Batches</span>
-                    <strong>{batches.length}</strong>
+                    <span>ACTIVE BATCHES</span>
+                    <strong>{activeBatches.length}</strong>
+                    <small>{totalUnits.toLocaleString()} inventory units</small>
                 </div>
 
                 <div className="batch-summary-card">
-                    <span>Inventory Units</span>
-                    <strong>{totalUnits}</strong>
-                </div>
-
-                <div className="batch-summary-card">
-                    <span>Expired Batches</span>
+                    <span>EXPIRED BATCHES</span>
                     <strong>{expiredBatchesList.length}</strong>
                 </div>
 
                 <div className="batch-summary-card">
-                    <span>High/Critical Risk</span>
+                    <span>HIGH/CRITICAL RISK</span>
                     <strong>{nearExpiryBatches}</strong>
                 </div>
+
+                <div className="batch-summary-card">
+                    <span>ARCHIVED BATCHES</span>
+                    <strong>{archivedBatches.length}</strong>
+                </div>
+
             </section>
-
             {showForm && (
-                <section className="batch-form-card">
-                    <h2>
-                        {editingBatchId !== null
-                            ? "Edit Batch Details"
-                            : "Receive New Batch"}
-                    </h2>
+                <div
+                    className="batch-modal-backdrop"
+                    onMouseDown={(event) => {
+                        if (event.target === event.currentTarget && !saving) {
+                            closeForm();
+                        }
+                    }}
+                >
+                    <section
+                        className="batch-form-card batch-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="batch-modal-title"
+                    >
+                        <h2 id="batch-modal-title">
+                            {editingBatchId !== null
+                                ? "Edit Batch Details"
+                                : "Receive New Batch"}
+                        </h2>
 
-                    {editingBatchId !== null && (
-                        <p>
-                            Product and quantity cannot be changed here.
-                            Inventory adjustments must use the stock
-                            transaction workflow.
-                        </p>
-                    )}
+                        {editingBatchId !== null && (
+                            <p>
+                                Product and quantity cannot be changed here.
+                                Inventory adjustments must use the stock
+                                transaction workflow.
+                            </p>
+                        )}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="batch-form-grid">
-                            {editingBatchId === null && (
+                        <form onSubmit={handleSubmit}>
+                            <div className="batch-form-grid">
+                                {editingBatchId === null && (
+                                    <label>
+                                        Product
+                                        <select
+                                            name="productId"
+                                            value={form.productId}
+                                            onChange={handleChange}
+                                            required
+                                        >
+                                            <option value="">
+                                                Select product
+                                            </option>
+
+                                            {products
+                                                .filter(
+                                                    (product) =>
+                                                        product.active !== false
+                                                )
+                                                .map((product) => (
+                                                    <option
+                                                        key={product.id}
+                                                        value={product.id}
+                                                    >
+                                                        {product.name} ({product.sku})
+                                                    </option>
+                                                ))}
+                                        </select>
+                                    </label>
+                                )}
+
                                 <label>
-                                    Product
-                                    <select
-                                        name="productId"
-                                        value={form.productId}
-                                        onChange={handleChange}
-                                        required
-                                    >
-                                        <option value="">
-                                            Select product
-                                        </option>
-
-                                        {products
-                                            .filter(
-                                                (product) =>
-                                                    product.active !== false
-                                            )
-                                            .map((product) => (
-                                                <option
-                                                    key={product.id}
-                                                    value={product.id}
-                                                >
-                                                    {product.name} ({product.sku})
-                                                </option>
-                                            ))}
-                                    </select>
-                                </label>
-                            )}
-
-                            <label>
-                                Batch Number
-                                <input
-                                    name="batchNumber"
-                                    value={form.batchNumber}
-                                    onChange={handleChange}
-                                    maxLength={100}
-                                    placeholder="e.g. PCM-B02"
-                                    required
-                                />
-                            </label>
-
-                            <label>
-                                Manufacturing Date
-                                <input
-                                    type="date"
-                                    name="manufacturingDate"
-                                    value={form.manufacturingDate}
-                                    onChange={handleChange}
-                                    max={form.expiryDate || undefined}
-                                />
-                            </label>
-
-                            <label>
-                                Expiry Date
-                                <input
-                                    type="date"
-                                    name="expiryDate"
-                                    value={form.expiryDate}
-                                    onChange={handleChange}
-                                    min={form.manufacturingDate || undefined}
-                                    required
-                                />
-                            </label>
-
-                            {editingBatchId === null && (
-                                <label>
-                                    Quantity Received
+                                    Batch Number
                                     <input
-                                        type="number"
-                                        name="quantity"
-                                        min="1"
-                                        step="1"
-                                        value={form.quantity}
+                                        name="batchNumber"
+                                        value={form.batchNumber}
                                         onChange={handleChange}
-                                        placeholder="e.g. 100"
+                                        maxLength={100}
+                                        placeholder="e.g. PCM-B02"
                                         required
                                     />
                                 </label>
-                            )}
 
-                            <label>
-                                Purchase Price per Unit (₹)
-                                <input
-                                    type="number"
-                                    name="purchasePrice"
-                                    min="0.01"
-                                    step="0.01"
-                                    value={form.purchasePrice}
-                                    onChange={handleChange}
-                                    placeholder="e.g. 15.00"
-                                    required
-                                />
-                            </label>
+                                <label>
+                                    Manufacturing Date
+                                    <input
+                                        type="date"
+                                        name="manufacturingDate"
+                                        value={form.manufacturingDate}
+                                        onChange={handleChange}
+                                        max={form.expiryDate || undefined}
+                                    />
+                                </label>
 
-                            <label>
-                                Received Date
-                                <input
-                                    type="date"
-                                    name="receivedDate"
-                                    value={form.receivedDate}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </label>
-                        </div>
+                                <label>
+                                    Expiry Date
+                                    <input
+                                        type="date"
+                                        name="expiryDate"
+                                        value={form.expiryDate}
+                                        onChange={handleChange}
+                                        min={form.manufacturingDate || undefined}
+                                        required
+                                    />
+                                </label>
 
-                        <div className="batch-form-actions">
-                            <button
-                                type="button"
-                                className="batch-secondary-button"
-                                onClick={closeForm}
-                                disabled={saving}
-                            >
-                                Cancel
-                            </button>
+                                {editingBatchId === null && (
+                                    <label>
+                                        Quantity Received
+                                        <input
+                                            type="number"
+                                            name="quantity"
+                                            min="1"
+                                            step="1"
+                                            value={form.quantity}
+                                            onChange={handleChange}
+                                            placeholder="e.g. 100"
+                                            required
+                                        />
+                                    </label>
+                                )}
 
-                            <button
-                                type="submit"
-                                className="batch-primary-button"
-                                disabled={saving}
-                            >
-                                {saving
-                                    ? "Saving..."
-                                    : editingBatchId !== null
-                                        ? "Save Changes"
-                                        : "Receive Batch"}
-                            </button>
-                        </div>
+                                <label>
+                                    Purchase Price per Unit (₹)
+                                    <input
+                                        type="number"
+                                        name="purchasePrice"
+                                        min="0.01"
+                                        step="0.01"
+                                        value={form.purchasePrice}
+                                        onChange={handleChange}
+                                        placeholder="e.g. 15.00"
+                                        required
+                                    />
+                                </label>
 
-                        {editingBatchId === null &&
-                            products.filter(
-                                (product) => product.active !== false
-                            ).length === 0 && (
-                                <p>
-                                    Create an active product before receiving
-                                    a batch.
-                                </p>
-                            )}
-                    </form>
-                </section>
+                                <label>
+                                    Received Date
+                                    <input
+                                        type="date"
+                                        name="receivedDate"
+                                        value={form.receivedDate}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </label>
+                            </div>
+
+                            <div className="batch-form-actions">
+                                <button
+                                    type="button"
+                                    className="batch-secondary-button"
+                                    onClick={closeForm}
+                                    disabled={saving}
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    className="batch-primary-button"
+                                    disabled={saving}
+                                >
+                                    {saving
+                                        ? "Saving..."
+                                        : editingBatchId !== null
+                                            ? "Save Changes"
+                                            : "Receive Batch"}
+                                </button>
+                            </div>
+
+                            {editingBatchId === null &&
+                                products.filter(
+                                    (product) => product.active !== false
+                                ).length === 0 && (
+                                    <p>
+                                        Create an active product before receiving
+                                        a batch.
+                                    </p>
+                                )}
+                        </form>
+                    </section>
+                </div>
             )}
 
             <section className="batches-table-card">
@@ -951,7 +988,7 @@ function Batches() {
                                     <strong>No archived batches</strong>
                                     <p>
                                         Batches archived after their stock
-                                        reaches zero will appear here.
+                                        reaches zero will appear here automatically.
                                     </p>
                                 </div>
                             ) : (

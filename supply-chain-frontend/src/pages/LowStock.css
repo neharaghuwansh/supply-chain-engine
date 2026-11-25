@@ -1,14 +1,13 @@
-/* ============================================
+/* =========================================
    LOW STOCK MONITORING
-   Premium Supply Chain Dashboard
-   ============================================ */
+   ========================================= */
 
 .low-stock-page {
     width: 100%;
     max-width: 1600px;
     min-width: 0;
     margin: 0 auto;
-    padding: 28px 32px 36px;
+    padding: 30px 32px 38px;
     color: #182338;
     font-family: inherit;
     box-sizing: border-box;
@@ -20,221 +19,165 @@
     box-sizing: border-box;
 }
 
-/* ============================================
+/* =========================================
    PAGE HEADER
-   ============================================ */
+   ========================================= */
 
-.low-stock-page .low-stock-header {
+.low-stock-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
-.low-stock-page .low-stock-header > div {
+.low-stock-header > div {
     min-width: 0;
 }
 
-.low-stock-page .low-stock-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    margin-bottom: 12px;
+.low-stock-eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
     color: #6558e8;
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: 1.8px;
+    letter-spacing: 1.7px;
 }
 
-.low-stock-page .low-stock-header h1 {
+.low-stock-header h1 {
     margin: 0;
     color: #17233b;
-    font-size: clamp(28px, 2.5vw, 36px);
+    font-size: clamp(27px, 2.5vw, 35px);
     font-weight: 850;
     line-height: 1.2;
-    letter-spacing: -1.1px;
+    letter-spacing: -1px;
 }
 
-.low-stock-page .low-stock-header p {
-    max-width: 720px;
-    margin: 11px 0 0;
-    color: #73819a;
+.low-stock-header p {
+    margin: 10px 0 0;
+    color: #75829a;
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
-.low-stock-page .low-stock-refresh {
+.low-stock-refresh {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
-    min-height: 45px;
+    min-height: 44px;
     padding: 0 19px;
     flex-shrink: 0;
-    border: 1px solid #e0e5f0;
-    border-radius: 11px;
-    background: #ffffff;
+    border: 1px solid #dfe5f0;
+    border-radius: 10px;
+    background: #fff;
     color: #34415b;
     font-family: inherit;
     font-size: 12px;
     font-weight: 750;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(29, 43, 74, 0.035);
     transition: all 0.2s ease;
 }
 
-.low-stock-page .low-stock-refresh:hover:not(:disabled) {
-    border-color: #c7c1ff;
+.low-stock-refresh:hover:not(:disabled) {
+    border-color: #c8c1ff;
     background: #f7f6ff;
     color: #5548d5;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(99, 88, 232, 0.1);
+    transform: translateY(-1px);
 }
 
-.low-stock-page .low-stock-refresh:disabled {
+.low-stock-refresh:disabled {
     cursor: not-allowed;
     opacity: 0.6;
 }
 
-/* ============================================
-   SUMMARY METRIC CARDS
-   ============================================ */
+/* =========================================
+   SUMMARY CARD
+   ========================================= */
 
-.low-stock-page .low-stock-summary {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.low-stock-page .low-stock-summary-card {
-    position: relative;
+.low-stock-summary {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    min-width: 0;
-    min-height: 172px;
-    padding: 25px 25px 23px;
-    overflow: hidden;
-    border: 1px solid #e7eaf3;
-    border-radius: 17px;
-    background: #ffffff;
-    box-shadow: 0 5px 18px rgba(30, 43, 74, 0.035);
-    transition:
-            transform 0.22s ease,
-            box-shadow 0.22s ease,
-            border-color 0.22s ease;
+    align-items: stretch;
+    margin-bottom: 25px;
 }
 
-.low-stock-page .low-stock-summary-card:hover {
-    transform: translateY(-3px);
-    border-color: #dfe2f8;
-    box-shadow: 0 12px 28px rgba(30, 43, 74, 0.075);
-}
-
-/* Subtle decorative circle */
-
-.low-stock-page .low-stock-summary-card::after {
-    position: absolute;
-    right: -35px;
-    bottom: -54px;
-    width: 145px;
-    height: 145px;
-    border: 20px solid rgba(99, 88, 232, 0.055);
-    border-radius: 50%;
-    content: "";
-    pointer-events: none;
-}
-
-.low-stock-page .low-stock-summary-card:nth-child(1) {
-    border-top: 3px solid #6558e8;
-    background: linear-gradient(145deg, #ffffff 55%, #f8f7ff 100%);
-}
-
-.low-stock-page .low-stock-summary-card:nth-child(1)::after {
-    border-color: rgba(99, 88, 232, 0.075);
-}
-
-.low-stock-page .low-stock-summary-card:nth-child(2) {
-    border-top: 3px solid #2997db;
-    background: linear-gradient(145deg, #ffffff 55%, #f4faff 100%);
-}
-
-.low-stock-page .low-stock-summary-card:nth-child(2)::after {
-    border-color: rgba(41, 151, 219, 0.075);
-}
-
-.low-stock-page .low-stock-summary-card:nth-child(3) {
-    border-top: 3px solid #e9a02b;
-    background: linear-gradient(145deg, #ffffff 55%, #fffbf2 100%);
-}
-
-.low-stock-page .low-stock-summary-card:nth-child(3)::after {
-    border-color: rgba(233, 160, 43, 0.09);
-}
-
-.low-stock-page .low-stock-summary-card > span {
+.low-stock-summary-card {
     position: relative;
-    z-index: 1;
-    color: #66748d;
-    font-size: 12px;
-    font-weight: 750;
-    line-height: 1.6;
-}
-
-.low-stock-page .low-stock-summary-card > strong {
-    position: relative;
-    z-index: 1;
-    display: block;
-    margin: 17px 0 12px;
-    color: #17233b;
-    font-size: 42px;
-    font-weight: 850;
-    line-height: 1;
-    letter-spacing: -1.5px;
-}
-
-.low-stock-page .low-stock-summary-card > small {
-    position: relative;
-    z-index: 1;
-    color: #8995aa;
-    font-size: 11px;
-    line-height: 1.6;
-}
-
-/* ============================================
-   REPLENISHMENT WATCHLIST
-   ============================================ */
-
-.low-stock-page .low-stock-panel {
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 22px;
-    overflow: hidden;
-    border: 1px solid #e5e9f2;
-    border-radius: 17px;
-    background: #ffffff;
-    box-shadow: 0 5px 22px rgba(30, 43, 74, 0.035);
-}
-
-.low-stock-page .low-stock-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    padding: 25px 27px;
-    border-bottom: 1px solid #edf0f6;
-    background: linear-gradient(115deg, #ffffff 65%, #fafaff 100%);
+    gap: 30px;
+    width: 100%;
+    max-width: 450px;
+    min-height: 112px;
+    padding: 21px 25px;
+    overflow: hidden;
+    border: 1px solid #e2e3ff;
+    border-top: 3px solid #6558e8;
+    border-radius: 14px;
+    background: linear-gradient(120deg, #ffffff, #f8f7ff);
+    box-shadow: 0 4px 14px rgba(30, 43, 74, 0.035);
 }
 
-.low-stock-page .low-stock-panel-header > div {
+.low-stock-summary-card > div {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.low-stock-summary-card > div > span {
+    color: #59677f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.low-stock-summary-card > div > small {
+    color: #8995aa;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.low-stock-summary-card > strong {
+    position: relative;
+    z-index: 1;
+    color: #19243a;
+    font-size: 38px;
+    font-weight: 850;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+/* =========================================
+   WATCHLIST PANEL
+   ========================================= */
+
+.low-stock-panel {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e4e8f1;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(30, 43, 74, 0.035);
+}
+
+.low-stock-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 23px 25px;
+    border-bottom: 1px solid #edf0f6;
+    background: #fff;
+}
+
+.low-stock-panel-header > div {
     min-width: 0;
 }
 
-.low-stock-page .low-stock-panel-header h2 {
+.low-stock-panel-header h2 {
     margin: 0;
     color: #19253b;
     font-size: 20px;
@@ -243,60 +186,56 @@
     letter-spacing: -0.5px;
 }
 
-.low-stock-page .low-stock-panel-header p {
-    margin: 7px 0 0;
+.low-stock-panel-header p {
+    margin: 6px 0 0;
     color: #8290a6;
     font-size: 12px;
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
-/* Search field */
+/* Search */
 
-.low-stock-page .low-stock-search {
-    width: 300px;
+.low-stock-search {
+    width: 290px;
     max-width: 100%;
-    min-height: 45px;
+    min-height: 43px;
     flex-shrink: 0;
-    padding: 0 15px;
+    padding: 0 14px;
     border: 1px solid #e0e5ef;
-    border-radius: 10px;
+    border-radius: 9px;
     outline: none;
-    background: #ffffff;
+    background: #fff;
     color: #202c43;
     font-family: inherit;
     font-size: 12px;
-    transition:
-            border-color 0.2s ease,
-            box-shadow 0.2s ease,
-            background 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-.low-stock-page .low-stock-search::placeholder {
+.low-stock-search::placeholder {
     color: #9ba6b8;
 }
 
-.low-stock-page .low-stock-search:hover {
+.low-stock-search:hover {
     border-color: #cbd2e2;
 }
 
-.low-stock-page .low-stock-search:focus {
+.low-stock-search:focus {
     border-color: #776cf0;
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(101, 88, 232, 0.1);
+    box-shadow: 0 0 0 3px rgba(101, 88, 232, 0.1);
 }
 
-/* ============================================
-   WATCHLIST TABLE
-   ============================================ */
+/* =========================================
+   TABLE
+   ========================================= */
 
-.low-stock-page .low-stock-table-wrapper {
+.low-stock-table-wrapper {
     width: 100%;
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
 }
 
-.low-stock-page .low-stock-table {
+.low-stock-table {
     width: 100%;
     min-width: 790px;
     border-collapse: separate;
@@ -304,104 +243,129 @@
     text-align: left;
 }
 
-.low-stock-page .low-stock-table thead {
-    background: #f7f9fd;
+.low-stock-table thead {
+    background: #f7f8fc;
 }
 
-.low-stock-page .low-stock-table th {
-    padding: 17px 23px;
+.low-stock-table th {
+    padding: 16px 20px;
     border-bottom: 1px solid #e9edf5;
     color: #718099;
     font-size: 10px;
     font-weight: 850;
-    letter-spacing: 0.75px;
-    line-height: 1.6;
+    letter-spacing: 0.6px;
+    line-height: 1.5;
     text-transform: uppercase;
     white-space: nowrap;
 }
 
-.low-stock-page .low-stock-table td {
-    padding: 21px 23px;
+.low-stock-table td {
+    padding: 19px 20px;
     border-bottom: 1px solid #edf0f6;
     color: #61708a;
     font-size: 12px;
-    line-height: 1.7;
+    line-height: 1.6;
     white-space: nowrap;
-    transition: background 0.15s ease;
 }
 
-.low-stock-page .low-stock-table tbody tr {
+.low-stock-table tbody tr {
     transition: background 0.18s ease;
 }
 
-.low-stock-page .low-stock-table tbody tr:hover {
+.low-stock-table tbody tr:hover {
     background: #fafaff;
 }
 
-.low-stock-page .low-stock-table tbody tr:last-child td {
+.low-stock-table tbody tr:last-child td {
     border-bottom: none;
 }
 
-.low-stock-page .low-stock-table .low-stock-product-name {
+.low-stock-table .low-stock-product-name {
     color: #1b2940;
     font-size: 12px;
     font-weight: 800;
 }
 
-/* ============================================
-   REPLENISHMENT STATUS
-   ============================================ */
+.low-stock-sku {
+    color: #75829a;
+}
 
-.low-stock-page .low-stock-status {
+.low-stock-reorder-quantity {
+    color: #24324a !important;
+    font-weight: 750;
+}
+
+/* =========================================
+   STATUS BADGES
+   ========================================= */
+
+.low-stock-status {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 7px;
-    padding: 8px 12px;
-    border: 1px solid #ffdbb0;
-    border-radius: 8px;
-    background: #fff8ef;
-    color: #bd550d;
+    padding: 7px 11px;
+    border: 1px solid;
+    border-radius: 7px;
     font-size: 10px;
     font-weight: 800;
     line-height: 1.4;
     white-space: nowrap;
 }
 
-.low-stock-page .low-stock-status::before {
+.low-stock-status::before {
     width: 6px;
     height: 6px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: #ed8a24;
     content: "";
 }
 
-/* ============================================
-   LOADING AND EMPTY STATES
-   ============================================ */
+.low-stock-status.status-required {
+    border-color: #ffdbb0;
+    background: #fff8ef;
+    color: #bd550d;
+}
 
-.low-stock-page .low-stock-state {
+.low-stock-status.status-required::before {
+    background: #ed8a24;
+}
+
+.low-stock-status.status-sufficient {
+    border-color: #bcebd0;
+    background: #effbf4;
+    color: #16834a;
+}
+
+.low-stock-status.status-sufficient::before {
+    background: #20a35b;
+}
+
+/* =========================================
+   LOADING AND EMPTY STATES
+   ========================================= */
+
+.low-stock-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 240px;
-    padding: 38px 24px;
+    min-height: 230px;
+    padding: 35px 22px;
     color: #718096;
     text-align: center;
     font-size: 13px;
     line-height: 1.8;
 }
 
-.low-stock-page .low-stock-state h3 {
-    margin: 15px 0 7px;
+.low-stock-state h3 {
+    margin: 14px 0 7px;
     color: #25334a;
     font-size: 17px;
-    font-weight: 850;
+    font-weight: 800;
 }
 
-.low-stock-page .low-stock-state p {
+.low-stock-state p {
     max-width: 420px;
     margin: 0;
     color: #8491a6;
@@ -409,45 +373,60 @@
     line-height: 1.8;
 }
 
-.low-stock-page .low-stock-empty-icon {
+.low-stock-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #e8e7ff;
+    border-top-color: #6558e8;
+    border-radius: 50%;
+    animation: lowStockSpin 0.8s linear infinite;
+}
+
+@keyframes lowStockSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.low-stock-empty-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
     border: 1px solid #c9f0d8;
-    border-radius: 16px;
+    border-radius: 15px;
     background: #edfcf3;
     color: #159447;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 850;
 }
 
-/* ============================================
+/* =========================================
    ERROR STATE
-   ============================================ */
+   ========================================= */
 
-.low-stock-page .low-stock-error {
+.low-stock-error {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 18px;
-    margin: 20px 25px;
-    padding: 16px 18px;
+    margin: 18px 24px;
+    padding: 14px 17px;
     border: 1px solid #fecaca;
-    border-radius: 11px;
+    border-radius: 10px;
     background: #fff5f5;
     color: #b42318;
     font-size: 12px;
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
-.low-stock-page .low-stock-error button {
-    min-height: 37px;
-    padding: 0 15px;
+.low-stock-error button {
+    min-height: 35px;
+    padding: 0 14px;
     border: 1px solid #f3b8b8;
-    border-radius: 8px;
-    background: #ffffff;
+    border-radius: 7px;
+    background: #fff;
     color: #b42318;
     font-family: inherit;
     font-size: 11px;
@@ -455,199 +434,160 @@
     cursor: pointer;
 }
 
-.low-stock-page .low-stock-error button:hover:not(:disabled) {
+.low-stock-error button:hover:not(:disabled) {
     background: #fff0f0;
 }
 
-/* ============================================
-   INVENTORY RULE / INFORMATION NOTE
-   ============================================ */
+/* =========================================
+   INVENTORY INFORMATION NOTE
+   ========================================= */
 
-.low-stock-page .low-stock-note {
+.low-stock-note {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    margin-top: 21px;
-    padding: 17px 20px;
-    border: 1px solid #e1e5ff;
-    border-radius: 12px;
-    background: linear-gradient(110deg, #f6f6ff, #fbfbff);
+    margin-top: 19px;
+    padding: 15px 18px;
+    border: 1px solid #e4e6ff;
+    border-radius: 10px;
+    background: #f8f8ff;
     color: #697791;
-    font-size: 12px;
-    line-height: 1.9;
+    font-size: 11px;
+    line-height: 1.8;
 }
 
-.low-stock-page .low-stock-note strong {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
+.low-stock-note strong {
     flex-shrink: 0;
     color: #5548cc;
     font-weight: 850;
 }
 
-/* ============================================
+/* =========================================
    MEDIUM SCREENS
-   ============================================ */
+   ========================================= */
 
 @media (max-width: 1100px) {
     .low-stock-page {
-        padding: 24px;
+        padding: 25px 24px 32px;
     }
 
-    .low-stock-page .low-stock-summary {
-        gap: 15px;
-    }
-
-    .low-stock-page .low-stock-summary-card {
-        min-height: 155px;
-        padding: 22px;
-    }
-
-    .low-stock-page .low-stock-summary-card > strong {
-        font-size: 38px;
-    }
-
-    .low-stock-page .low-stock-panel-header {
-        padding: 22px;
-    }
-
-    .low-stock-page .low-stock-table th,
-    .low-stock-page .low-stock-table td {
-        padding-right: 17px;
-        padding-left: 17px;
+    .low-stock-table th,
+    .low-stock-table td {
+        padding-right: 16px;
+        padding-left: 16px;
     }
 }
 
-/* ============================================
-   TABLET AND NARROW LAYOUTS
-   ============================================ */
+/* =========================================
+   TABLET
+   ========================================= */
 
 @media (max-width: 760px) {
     .low-stock-page {
         padding: 21px 17px 28px;
     }
 
-    .low-stock-page .low-stock-header {
+    .low-stock-header {
         align-items: flex-start;
         gap: 16px;
-        margin-bottom: 23px;
-    }
-
-    .low-stock-page .low-stock-header h1 {
-        font-size: 28px;
-    }
-
-    .low-stock-page .low-stock-header p {
-        font-size: 13px;
-    }
-
-    .low-stock-page .low-stock-refresh {
-        min-height: 41px;
-        padding: 0 13px;
-        font-size: 11px;
-    }
-
-    .low-stock-page .low-stock-summary {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 13px;
         margin-bottom: 22px;
     }
 
-    .low-stock-page .low-stock-summary-card {
-        min-height: 137px;
-        padding: 19px;
-        border-radius: 14px;
+    .low-stock-header h1 {
+        font-size: 28px;
     }
 
-    .low-stock-page .low-stock-summary-card:last-child {
-        grid-column: 1 / -1;
-        min-height: 125px;
+    .low-stock-header p {
+        font-size: 13px;
     }
 
-    .low-stock-page .low-stock-summary-card > strong {
+    .low-stock-summary {
+        margin-bottom: 20px;
+    }
+
+    .low-stock-summary-card {
+        max-width: 100%;
+        min-height: 100px;
+        padding: 19px 21px;
+    }
+
+    .low-stock-summary-card > strong {
         font-size: 34px;
     }
 
-    .low-stock-page .low-stock-panel-header {
+    .low-stock-panel-header {
         align-items: stretch;
         flex-direction: column;
-        gap: 17px;
+        gap: 15px;
         padding: 20px;
     }
 
-    .low-stock-page .low-stock-panel-header h2 {
-        font-size: 18px;
-    }
-
-    .low-stock-page .low-stock-search {
+    .low-stock-search {
         width: 100%;
     }
 
-    .low-stock-page .low-stock-table {
+    .low-stock-table {
         min-width: 790px;
     }
 
-    .low-stock-page .low-stock-note {
+    .low-stock-note {
         flex-direction: column;
         gap: 5px;
-        padding: 15px 17px;
+        padding: 14px 16px;
     }
 }
 
-/* ============================================
-   SMALL MOBILE SCREENS
-   ============================================ */
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
 
 @media (max-width: 440px) {
     .low-stock-page {
         padding: 17px 12px 24px;
     }
 
-    .low-stock-page .low-stock-header {
+    .low-stock-header {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .low-stock-page .low-stock-header h1 {
-        font-size: 26px;
+    .low-stock-header h1 {
+        font-size: 25px;
     }
 
-    .low-stock-page .low-stock-refresh {
+    .low-stock-refresh {
         align-self: flex-start;
     }
 
-    .low-stock-page .low-stock-summary {
-        grid-template-columns: 1fr;
-    }
-
-    .low-stock-page .low-stock-summary-card,
-    .low-stock-page .low-stock-summary-card:last-child {
-        grid-column: auto;
-        min-height: 122px;
-    }
-
-    .low-stock-page .low-stock-summary-card > strong {
-        margin-top: 13px;
-        font-size: 32px;
-    }
-
-    .low-stock-page .low-stock-panel-header {
+    .low-stock-summary-card {
+        min-height: 95px;
         padding: 17px;
     }
 
-    .low-stock-page .low-stock-table th,
-    .low-stock-page .low-stock-table td {
-        padding: 15px;
+    .low-stock-summary-card > strong {
+        font-size: 31px;
     }
 
-    .low-stock-page .low-stock-error {
+    .low-stock-panel-header {
+        padding: 17px;
+    }
+
+    .low-stock-panel-header h2 {
+        font-size: 18px;
+    }
+
+    .low-stock-table th,
+    .low-stock-table td {
+        padding: 14px;
+    }
+
+    .low-stock-error {
         align-items: flex-start;
         flex-direction: column;
-        margin: 16px;
+        margin: 15px;
     }
 
-    .low-stock-page .low-stock-note {
+    .low-stock-note {
         font-size: 11px;
     }
 }

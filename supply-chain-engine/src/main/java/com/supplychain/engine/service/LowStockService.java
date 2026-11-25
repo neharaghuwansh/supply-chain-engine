@@ -4,6 +4,7 @@ import com.supplychain.engine.entity.Batch;
 import com.supplychain.engine.entity.Product;
 import com.supplychain.engine.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,7 @@ public class LowStockService {
         this.productRepository = productRepository;
     }
 
+    @Transactional(readOnly = true)
     public LowStockResult checkLowStock(Long productId) {
 
         Product product = productRepository.findById(productId)

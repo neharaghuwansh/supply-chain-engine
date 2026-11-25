@@ -21,7 +21,6 @@ import java.util.UUID;
 
 @Service
 public class SaleService {
-
     private final SaleRepository saleRepository;
     private final ProductRepository productRepository;
     private final BatchRepository batchRepository;
@@ -288,7 +287,7 @@ public class SaleService {
 
     @Transactional(readOnly = true)
     public Sale getSaleById(Long id) {
-        return saleRepository.findById(id)
+        return saleRepository.findWithItemsById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Sale not found: " + id));
     }

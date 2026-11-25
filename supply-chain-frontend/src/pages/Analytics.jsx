@@ -100,9 +100,6 @@ function Analytics() {
         purchased: 0,
         sold: 0,
         returned: 0,
-        damaged: 0,
-        expired: 0,
-        adjusted: 0,
     };
 
     const expiryRisk = reports?.expiryRisk ?? {
@@ -112,7 +109,7 @@ function Analytics() {
     };
 
     const totalRevenue = salesTrend.reduce(
-        (total, item) => total + Number(item.revenue ?? 0),
+        (total, item) => total + Number(item.netRevenue ?? 0),
         0
     );
 
@@ -123,7 +120,7 @@ function Analytics() {
 
     const maxRevenue = Math.max(
         1,
-        ...salesTrend.map((item) => Number(item.revenue ?? 0))
+        ...salesTrend.map((item) => Number(item.netRevenue ?? 0))
     );
 
     const movementMetrics = [
@@ -147,27 +144,6 @@ function Analytics() {
             description: "Recorded customer returns",
             color: "purple",
             icon: "↩",
-        },
-        {
-            label: "Units Damaged",
-            value: movement.damaged,
-            description: "Stock written off as damaged",
-            color: "red",
-            icon: "!",
-        },
-        {
-            label: "Units Expired",
-            value: movement.expired,
-            description: "Stock written off after expiry",
-            color: "orange",
-            icon: "◷",
-        },
-        {
-            label: "Net Stock Adjustment",
-            value: movement.adjusted,
-            description: "Positive or negative adjustments combined",
-            color: "yellow",
-            icon: "±",
         },
     ];
 
@@ -343,11 +319,13 @@ function Analytics() {
                                 <div className="analytics-trend-list">
                                     {salesTrend.map((item) => {
                                         const revenue = Number(
-                                            item.revenue ?? 0
+                                            item.netRevenue ?? 0
                                         );
 
-                                        const width =
-                                            (revenue / maxRevenue) * 100;
+                                        const width = Math.max(
+                                            0,
+                                            (revenue / maxRevenue) * 100
+                                        );
 
                                         return (
                                             <div
@@ -501,12 +479,7 @@ function Analytics() {
                             ))}
                         </div>
 
-                        <div className="analytics-report-note">
-                            Stock adjustments are shown as a net quantity:
-                            increases minus decreases. Returns represent
-                            recorded return transactions and may not always
-                            increase sellable stock.
-                        </div>
+
                     </section>
 
                     {/* EXPIRY RISK */}

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -89,6 +90,15 @@ public class BatchService {
         if (batch.isArchived()) {
             throw new IllegalStateException(
                     "Archived batches cannot be edited"
+            );
+        }
+
+        // Expired batches cannot be edited through ordinary batch editing.
+        if (batch.getExpiryDate() != null
+                && batch.getExpiryDate().isBefore(LocalDate.now())) {
+            throw new IllegalStateException(
+                    "Expired batches cannot be edited. "
+                            + "Expiry corrections require a separate authorized process."
             );
         }
 

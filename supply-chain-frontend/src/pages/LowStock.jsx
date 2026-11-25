@@ -76,27 +76,10 @@ function LowStock() {
         return name.includes(query) || sku.includes(query);
     });
 
-    const totalReorderUnits = filteredProducts.reduce(
-        (total, product) => {
-            const stock = Number(getAvailableStock(product));
-            const threshold = Number(getThreshold(product));
-
-            if (
-                getAvailableStock(product) === null ||
-                getThreshold(product) === null ||
-                !Number.isFinite(stock) ||
-                !Number.isFinite(threshold)
-            ) {
-                return total;
-            }
-
-            return total + Math.max(0, threshold - stock);
-        },
-        0
-    );
-
     return (
         <div className="low-stock-page">
+
+            {/* Page Header */}
             <header className="low-stock-header">
                 <div>
                     <span className="low-stock-eyebrow">
@@ -121,27 +104,23 @@ function LowStock() {
                 </button>
             </header>
 
+            {/* Summary */}
             <section className="low-stock-summary">
                 <div className="low-stock-summary-card">
-                    <span>Products Requiring Attention</span>
-                    <strong>{loading ? "—" : products.length}</strong>
-                    <small>Based on backend stock rules</small>
-                </div>
+                    <div>
+                        <span>PRODUCTS REQUIRING ATTENTION</span>
+                        <small>Based on backend stock rules</small>
+                    </div>
 
-                <div className="low-stock-summary-card">
-                    <span>Search Results</span>
-                    <strong>{loading ? "—" : filteredProducts.length}</strong>
-                    <small>Matching products</small>
-                </div>
-
-                <div className="low-stock-summary-card">
-                    <span>Estimated Reorder Units</span>
-                    <strong>{loading ? "—" : formatQuantity(totalReorderUnits)}</strong>
-                    <small>Based on available stock and thresholds</small>
+                    <strong>
+                        {loading ? "—" : products.length}
+                    </strong>
                 </div>
             </section>
 
+            {/* Replenishment Watchlist */}
             <section className="low-stock-panel">
+
                 <div className="low-stock-panel-header">
                     <div>
                         <h2>Replenishment Watchlist</h2>
@@ -153,7 +132,7 @@ function LowStock() {
                     <input
                         type="search"
                         className="low-stock-search"
-                        placeholder="Search name or SKU..."
+                        placeholder="Search by product name or SKU..."
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
                         aria-label="Search low-stock products"
@@ -176,7 +155,8 @@ function LowStock() {
 
                 {loading ? (
                     <div className="low-stock-state">
-                        Loading stock information...
+                        <div className="low-stock-spinner" />
+                        <p>Loading stock information...</p>
                     </div>
                 ) : error ? null : filteredProducts.length === 0 ? (
                     <div className="low-stock-state">
@@ -247,16 +227,30 @@ function LowStock() {
                                             {getProductName(product)}
                                         </td>
 
-                                        <td>{product.sku || "—"}</td>
-
-                                        <td>{formatQuantity(stock)}</td>
-
-                                        <td>{formatQuantity(threshold)}</td>
-
-                                        <td>{formatQuantity(reorderQuantity)}</td>
+                                        <td className="low-stock-sku">
+                                            {product.sku || "—"}
+                                        </td>
 
                                         <td>
-                                                <span className="low-stock-status">
+                                            {formatQuantity(stock)}
+                                        </td>
+
+                                        <td>
+                                            {formatQuantity(threshold)}
+                                        </td>
+
+                                        <td className="low-stock-reorder-quantity">
+                                            {formatQuantity(reorderQuantity)}
+                                        </td>
+
+                                        <td>
+                                                <span
+                                                    className={`low-stock-status ${
+                                                        lowStock
+                                                            ? "status-required"
+                                                            : "status-sufficient"
+                                                    }`}
+                                                >
                                                     {lowStock
                                                         ? "Replenishment Required"
                                                         : "Stock Sufficient"}
@@ -272,11 +266,15 @@ function LowStock() {
             </section>
 
             <div className="low-stock-note">
-                <strong>Inventory rule:</strong> Expired and zero-quantity
-                batches are excluded from sellable stock calculations.
-                Reorder quantities are estimates based on the difference
-                between the reorder threshold and available stock.
+                <strong>Inventory rule</strong>
+                <span>
+                    Expired and zero-quantity batches are excluded from
+                    sellable stock calculations. Reorder quantities are
+                    estimates based on the difference between the reorder
+                    threshold and available stock.
+                </span>
             </div>
+
         </div>
     );
 }
