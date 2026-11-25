@@ -1,5 +1,5 @@
 package com.supplychain.engine.service;
-
+import java.time.ZoneId;
 import com.supplychain.engine.entity.Batch;
 import com.supplychain.engine.entity.InventoryTransaction;
 import com.supplychain.engine.entity.InventoryTransactionType;
@@ -125,7 +125,7 @@ public class InventoryTransactionService {
         }
 
         // Do not process batches that have not expired.
-        if (batch.getExpiryDate().isAfter(LocalDate.now())) {
+        if (batch.getExpiryDate().isAfter(LocalDate.now(ZoneId.of("Asia/Kolkata")))) {
             return null;
         }
 
@@ -205,7 +205,7 @@ public class InventoryTransactionService {
         validateBatchNotArchived(batch);
 
         boolean expired = batch.getExpiryDate() == null
-                || !batch.getExpiryDate().isAfter(LocalDate.now());
+                || !batch.getExpiryDate().isAfter(LocalDate.now(ZoneId.of("Asia/Kolkata")));
 
         if (!expired) {
             increaseStock(batch, quantity);
@@ -328,7 +328,7 @@ public class InventoryTransactionService {
             );
         }
 
-        if (!batch.getExpiryDate().isAfter(LocalDate.now())) {
+        if (!batch.getExpiryDate().isAfter(LocalDate.now(ZoneId.of("Asia/Kolkata")))) {
             throw new IllegalStateException(
                     "Cannot sell expired batch: "
                             + batch.getBatchNumber()
@@ -344,7 +344,7 @@ public class InventoryTransactionService {
             );
         }
 
-        if (batch.getExpiryDate().isAfter(LocalDate.now())) {
+        if (batch.getExpiryDate().isAfter(LocalDate.now(ZoneId.of("Asia/Kolkata")))) {
             throw new IllegalStateException(
                     "Cannot write off stock as expired before its expiry date: "
                             + batch.getBatchNumber()
