@@ -19,6 +19,4 @@
 *.log
 .DS_Store
 Thumbs.db
-
-/supply-chain-engine/src/main/resources/application.properties
 /supply-chain-engine/test-invoice.pdf
